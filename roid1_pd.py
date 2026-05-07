@@ -80,6 +80,7 @@ KHR_roter_inertia = [0.01]*22
 robot = scene.add_entity(
     gs.morphs.URDF(
         file="../assets/roid1/URDF/roid1_urdf_genesis.urdf",  
+        #file="../assets/roid1/URDF/roid1_foot_large.urdf",    # foot large 
         pos=base_init_pos,
         quat=base_init_quat,
     ),
