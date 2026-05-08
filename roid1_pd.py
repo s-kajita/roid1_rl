@@ -71,16 +71,21 @@ scene = gs.Scene(
 )
 
 # add plain
-plane = scene.add_entity(gs.morphs.URDF(file="urdf/plane/plane.urdf", fixed=True))
+plane = scene.add_entity(gs.morphs.URDF(file="urdf/plane/plane_light.urdf", fixed=True))
 
 # add robot
+#URDF_data = "../assets/roid1/URDF/roid1_urdf_genesis.urdf" 
+#URDF_data = "../assets/roid1/URDF/roid1_large_feet.urdf"  
+#URDF_data = "../assets/roid1/URDF/roid1_middle_feet.urdf"  
+URDF_data = "../assets/roid1/URDF/roid1_small_feet.urdf"  
+
+
 base_init_pos = env_cfg["base_init_pos"]
 base_init_quat = env_cfg["base_init_quat"]
 KHR_roter_inertia = [0.01]*22
 robot = scene.add_entity(
-    gs.morphs.URDF(
-        file="../assets/roid1/URDF/roid1_urdf_genesis.urdf",  
-        #file="../assets/roid1/URDF/roid1_foot_large.urdf",    # foot large 
+    gs.morphs.URDF(  
+        file=URDF_data,
         pos=base_init_pos,
         quat=base_init_quat,
     ),
@@ -139,6 +144,8 @@ robot.set_dofs_force_range(
     dofs_idx_local = dofs_idx,
 )
 '''
+
+print("Robot model: ", URDF_data)
 
 # 初期姿勢設定
 #default_joint_angles = np.array([0,0,-0.2,0.4,-0.2,0]*2)
