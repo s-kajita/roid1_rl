@@ -20,10 +20,10 @@ env_cfg = []
 
 def get_cfgs():
     env_cfg = {
-        "num_actions": 12, #強化学習する関節の数
+        "num_actions": 22, #強化学習する関節の数
        # PD
-        "kp": np.array([25.0]*12),   # default 25
-        "kd": np.array([0.5]*12),  # default 0.5
+        "kp": np.array([25.0]*22),   # default 25
+        "kd": np.array([0.5]*22),  # default 0.5
         #"armature": np.array([0.149,0.401,0.434,0.536,0.226,0.070]*2),
         # termination
         "termination_if_roll_greater_than": 15,  # degree
@@ -74,11 +74,15 @@ scene = gs.Scene(
 plane = scene.add_entity(gs.morphs.URDF(file="urdf/plane/plane_light.urdf", fixed=True))
 
 # add robot
-URDF_data = "../assets/roid1/URDF/roid1_12dof.urdf"  
+#URDF_data = "../assets/roid1/URDF/roid1_urdf_genesis.urdf" 
+#URDF_data = "../assets/roid1/URDF/roid1_large_feet.urdf"  
+URDF_data = "../assets/roid1/URDF/roid1_middle_feet.urdf"  
+#URDF_data = "../assets/roid1/URDF/roid1_small_feet.urdf"  
+#URDF_data = "../assets/roid1/URDF/roid1_12dof.urdf"  
 
 base_init_pos = env_cfg["base_init_pos"]
 base_init_quat = env_cfg["base_init_quat"]
-KHR_roter_inertia = [0.01]*12
+KHR_roter_inertia = [0.01]*22
 robot = scene.add_entity(
     gs.morphs.URDF(  
         file=URDF_data,
@@ -92,12 +96,25 @@ robot = scene.add_entity(
 scene.build()
 
 jnt_names = [
+    "c_chest_yaw",
+    "c_head_yaw",
+    
+    "l_shoulder_pitch",
+    "l_shoulder_roll",
+    "l_elbow_yaw",
+    "l_elbow_pitch",
+
     "l_hipjoint_yaw", #default_joint_anglesの名前に合わせて変更
     "l_hipjoint_roll",
     "l_hipjoint_pitch",
     "l_knee_pitch",
     "l_ankle_pitch",
     "l_ankle_roll",
+    
+    "r_shoulder_pitch",
+    "r_shoulder_roll",
+    "r_elbow_yaw",
+    "r_elbow_pitch",
 
     "r_hipjoint_yaw",
     "r_hipjoint_roll",
@@ -132,7 +149,7 @@ print("Robot model: ", URDF_data)
 
 # 初期姿勢設定
 #default_joint_angles = np.array([0,0,-0.2,0.4,-0.2,0]*2)
-default_joint_angles = np.array([0]*12) 
+default_joint_angles = np.array([0]*22) 
 
 # PD制御
 for i in range(300):

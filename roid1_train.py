@@ -99,8 +99,8 @@ def get_cfgs():
         ],
 
         # PD
-        "kp": 25.0,
-        "kd": 0.5,
+        "kp": 25.0,   # default 25.0
+        "kd": 0.5,    # default 0.5
  
         "armature": 0.01,   # [kgm^2]  default 0.1
         
@@ -109,7 +109,7 @@ def get_cfgs():
         "termination_if_pitch_greater_than": 50,
         "termination_if_ankle_distance_smaller_than":0.085,
         # base pose
-        "base_init_pos": [0.0, 0.0, 0.28],
+        "base_init_pos": [0.0, 0.0, 0.28],   # default [0,0.0.28]
         "base_init_quat": [1.0, 0.0, 0.0, 0.0],
         "episode_length_s": 20.0,
         "resampling_time_s": 4.0,
@@ -193,7 +193,11 @@ def get_cfgs():
     return env_cfg, obs_cfg, reward_cfg, command_cfg
 
 
+env = []
+
 def main():
+    global env
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-e", "--exp_name", type=str, default="roid1-walking")
     parser.add_argument("-B", "--num_envs", type=int, default=4096)

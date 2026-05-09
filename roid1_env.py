@@ -17,7 +17,7 @@ def gs_rand_float(lower, upper, shape, device):
 
 
 class Roid1Env:
-    def __init__(self, num_envs, env_cfg, obs_cfg, reward_cfg, command_cfg, show_viewer=False):
+    def __init__(self, num_envs, env_cfg, obs_cfg, reward_cfg, command_cfg, show_viewer=True):
         self.num_envs: int = num_envs
         self.num_actions = env_cfg["num_actions"]
         self.cfg = env_cfg
@@ -64,7 +64,7 @@ class Roid1Env:
         # add plain
         self.ground = self.scene.add_entity(
             gs.morphs.URDF(
-                file="urdf/plane/plane.urdf",
+                file="urdf/plane/plane_light.urdf",
                 fixed=True,
             )
         )
@@ -72,7 +72,7 @@ class Roid1Env:
         # add robot
         self.robot = self.scene.add_entity(
             gs.morphs.URDF(
-                file="../assets/roid1/URDF/roid1_urdf_genesis.urdf",
+                file="../assets/roid1/URDF/roid1_12dof.urdf",
                 pos=self.env_cfg["base_init_pos"],
                 quat=self.env_cfg["base_init_quat"],
             ),
